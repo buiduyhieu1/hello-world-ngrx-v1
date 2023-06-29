@@ -1,0 +1,97 @@
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+        <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold">Sign Up</h3>
+          </div>
+          <div class="panel-body p-3">
+            <form action=""
+              *ngIf="!isSuccessful"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmit()"
+              #f="ngForm"
+              novalidate>
+              <div class="form-group pt-3">
+                <div class="input-field">
+                  <span class="fa fa-user p-2"></span>
+                  <input type="text" name="username"
+                    id="" placeholder="Username"
+                    [(ngModel)]="form.username"
+                    class="form-control"
+                    required
+                    minlength="3"
+                    maxlength="20"
+                    #username="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && username.errors }" />
+                </div>
+                <div class="invalid-feedback" *ngIf="username.errors && f.submitted">
+                  <div *ngIf="username.errors['required']">Username is required</div>
+                  <div *ngIf="username.errors['minlength']">
+                    Username must be at least 3 characters
+                  </div>
+                  <div *ngIf="username.errors['maxlength']">
+                    Username must be at most 20 characters
+                  </div>
+                </div>
+              </div>
+              <div class="form-group pt-3">
+                <div class="input-field">
+                  <span class="fa fa-user p-2"></span>
+                  <input type="text" name="email"
+                    id="" placeholder="Email"
+                    class="form-control"
+                    [(ngModel)]="form.email"
+                    required
+                    email
+                    #email="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && email.errors }" />
+                </div>
+                <div class="invalid-feedback" *ngIf="email.errors && f.submitted">
+                  <div *ngIf="email.errors['required']">Email is required</div>
+                  <div *ngIf="email.errors['email']">
+                    Email must be a valid email address
+                  </div>
+                </div>
+              </div>
+              <div class="form-group pt-3">
+                <div class="input-field">
+                  <span class="fa fa-lock p-2"></span>
+                  <input [type]="passwordType" name="password" id="" placeholder="Password"
+                    [(ngModel)]="form.password"
+                    required
+                    minlength="6"
+                    #password="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+                  <span (click)="hideShowPassword()" class="fa {{eyeIcon}}"></span>
+                </div>
+                <div class="invalid-feedback" *ngIf="password.errors && f.submitted">
+                  <div *ngIf="password.errors['required']">Password is required</div>
+                  <div *ngIf="password.errors['minlength']">
+                    Password must be at least 6 characters
+                  </div>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Sign up</button>
+              <div class="alert alert-warning" *ngIf="f.submitted && isSignUpFailed">
+                Signup failed!<br />{{ errorMessage }}
+              </div>
+              <div class="text-center pt-4 text-muted">Already have account? <a id="forget" routerLink="/login">Login</a></div>
+            </form>
+          </div>
+          <div class="alert alert-success" *ngIf="isSuccessful">
+            Your registration is successful!
+          </div>
+          <!-- <div class="mx-3 my-2 py-2 bordert">
+            <div class="text-center py-3">
+              <a href="https://www.facebook.com" target="_blank" class="px-2"><img src="https://www.dpreview.com/files/p/articles/4698742202/facebook.jpeg" alt=""></a>
+              <a href="https://www.google.com" target="_blank" class="px-2"><img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" alt=""></a>
+              <a href="https://www.github.com" target="_blank" class="px-2"><img src="https://www.freepnglogos.com/uploads/512x512-logo-png/512x512-logo-github-icon-35.png" alt=""></a>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

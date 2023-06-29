@@ -1,0 +1,78 @@
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+        <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold">Login</h3>
+          </div>
+          <div class="panel-body p-3">
+            <form action=""
+              *ngIf="!isLoggedIn"
+              name="form"
+              (ngSubmit)="f.form.valid && onSubmit()"
+              #f="ngForm"
+              novalidate>
+              <div class="form-group pt-3">
+                <div class="input-field">
+                  <span class="fa fa-user p-2"></span>
+                  <input type="text" id=""
+                    placeholder="Username"
+                    class="form-control"
+                    name="username"
+                    [(ngModel)]="form.username"
+                    required
+                    #username="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && username.errors }" />
+                </div>
+                <div *ngIf="username.errors && f.submitted" class="invalid-feedback">
+                  Username is required!
+                </div>
+              </div>
+              <div class="form-group pt-3">
+                <div class="input-field">
+                  <span class="fa fa-lock p-2"></span>
+                  <input [type]="passwordType" id="" placeholder="Password"
+                    class="form-control"
+                    name="password"
+                    [(ngModel)]="form.password"
+                    required
+                    minlength="6"
+                    #password="ngModel"
+                    [ngClass]="{ 'is-invalid': f.submitted && password.errors }" />
+                  <span (click)="hideShowPassword()" class="fa {{eyeIcon}}"></span>
+                </div>
+                <div *ngIf="password.errors && f.submitted" class="invalid-feedback">
+                  <div *ngIf="password.errors['required']">Password is required</div>
+                  <div *ngIf="password.errors['minlength']">
+                    Password must be at least 6 characters
+                  </div>
+                </div>
+              </div>
+              <div class="form-inline fr mt-4">
+                <a href="#" id="forget" class="font-weight-bold">Forget Password?</a>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+              <div class="form-group">
+                <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger" role="alert">
+                  Login failed: {{ errorMessage }}
+                </div>
+              </div>
+              <div class="text-center pt-4 text-muted">Don't have account? <a id="forget" routerLink="/signup">Sign up</a></div>
+            </form>
+          </div>
+          <div class="alert alert-success" *ngIf="isLoggedIn">
+            Logged in as {{ roles }}.
+          </div>
+          <div class="mx-3 my-2 py-2 bordert">
+            <div class="text-center py-3">
+              <a href="https://www.facebook.com" target="_blank" class="px-2"><img src="https://www.dpreview.com/files/p/articles/4698742202/facebook.jpeg" alt=""></a>
+              <a href="https://www.google.com" target="_blank" class="px-2"><img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" alt=""></a>
+              <a href="https://www.github.com" target="_blank" class="px-2"><img src="https://www.freepnglogos.com/uploads/512x512-logo-png/512x512-logo-github-icon-35.png" alt=""></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
